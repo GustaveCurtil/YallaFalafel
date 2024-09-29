@@ -1,0 +1,80 @@
+*, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: 0;
+}
+
+body {
+    width: 100vw;
+    max-width: 700px;
+    height: 100svh;
+
+    overflow: none;
+
+    margin: 0 auto;
+}
+
+h1 {
+    width: 100%;
+    height: 10svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: red;
+    color: white;
+}
+
+main {
+    width: 100%;
+    height: 50svh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+section {
+    width: 100%;
+    height: 40svh;
+}
+
+section button {
+    width: 100%;
+    height: 10svh;
+
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+}
+
+section button:hover {
+    background-color: green;
+    color: white;
+}
+
+section div {
+    display: flex;
+}
+
+section div button {
+    width: 50%;
+    border-top: 0;
+}
+
+section div button:first-child {
+    border-right: 0;
+}
+
+section button#start {
+    height: 20svh;
+
+    border-top: 0;
+
+    background-color: black;
+    color: white;
+}
+
+section button#start:hover {
+    background-color: rgb(255, 0, 0);
+}

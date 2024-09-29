@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Yalla Falafel</title>
+</head>
+<body onload="weergaveUpdaten()">
+    <h1>Yalla Falafel</h1>
+    <main>
+        <p>Dag: <span id="dag">?</span>/<span id="zomerdagen">?</span></p>
+        <p>Geld: <span id="geld">?</span></p>
+        <p>Reputatie: <span id="reputatie">?</span>%</p>
+        <p>Falafels: <span id="falafels">?</span></p>
+        <p>Volgende locatie: <span id="locatie">?</span></p>
+    </main>
+    <section>
+        <button id="koop" onclick="koopFalafel()">koop falafel</button>
+        <div>
+            <button id="locatieA" onclick="kiesLocatie('Baudelo')">Baudelo</button>
+            <button id="locatieB" onclick="kiesLocatie('De Kouter')">De Kouter</button>
+        </div>
+        <button id="start" onclick="startDag()">Start dag</button>
+    </section>
+</body>
+</html>
