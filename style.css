@@ -13,7 +13,7 @@ body {
     max-width: 700px;
     height: 100svh;
 
-    overflow: none;
+    overflow: hidden;
 
     margin: 0 auto;
 }
@@ -48,7 +48,7 @@ header button:hover {
 }
 
 aside {
-    height: 5svh;
+    height: 10svh;
     width: 100%;
 
     border: 2px solid black;
@@ -70,7 +70,7 @@ main {
 
 section {
     width: 100%;
-    height: 40svh;
+    height: 35svh;
 }
 
 section button {
@@ -100,7 +100,7 @@ section div button:first-child {
 }
 
 section button#start {
-    height: 20svh;
+    height: 15svh;
 
     border-top: 0;
 
@@ -110,4 +110,9 @@ section button#start {
 
 section button#start:hover {
     background-color: rgb(255, 0, 0);
+}
+
+button:active {
+    background-color: initial;
+    color: initial;
 }

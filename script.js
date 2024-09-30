@@ -45,7 +45,7 @@ function weergaveUpdaten() {
     geldWeergave.innerHTML = geld;
     reputatieWeergave.innerHTML = reputatie;
     falafelsWeergave.innerHTML = falafels;
-    locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten + ")";
+    locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten;
 
     locaties.forEach(locatieKnop => {
         if (locatieKnop.innerHTML == locatie) {
@@ -72,9 +72,6 @@ function koopFalafel() {
 
 function kiesLocatie(naam) {
     if (spel) {
-        console.log(reputatie);
-        console.log(klanten * reputatie);
-        console.log((klanten * reputatie) / 100);
         locatie = naam;
         if (naam === 'Baudelo') {
             klanten = Math.floor((10 * reputatie) / 100);
@@ -93,7 +90,6 @@ function startDag() {
         dag += 1;
         let teleurgestelden = 0;
         let omzet = 0;
-        console.log(klanten);
         
         if (falafels >= klanten) {
             console.log('genoeg falafel voor iedereen');
@@ -112,7 +108,7 @@ function startDag() {
         geld += omzet;
 
         boodschap = "DAG " + dag + ": Je hebt " + (klanten - teleurgestelden) + " klanten bediend (omzet: " + omzet + " geld)";
-        
+
         kiesLocatie(locatie); 
         checkGameStatus();
         weergaveUpdaten();
@@ -124,9 +120,9 @@ function startDag() {
 function checkGameStatus() {
     if (dag === zomerdagen) {
         spel = false;
-        boodschap = 'YOU WIN: je hebt ' + zomerdagen + ' zomerdagen overleefd met een score van ' + score + ' verkochte falafels!';
+        boodschap = 'Je hebt ' + zomerdagen + ' zomerdagen overleefd met een score van ' + score + ' verkochte falafels!';
     } else if (reputatie < 0) {
-        boodschap = 'GAME OVER: geen reputatie';
+        boodschap = 'GAME OVER: geen reputatie = geen klanten';
         spel = false;
     } else if (geld === 0 && falafels === 0) {
         boodschap = 'GAME OVER: geen geld en falafels makker';
