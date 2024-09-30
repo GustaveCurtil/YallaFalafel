@@ -7,8 +7,11 @@
     <script src="script.js" defer></script>
     <title>Yalla Falafel</title>
 </head>
-<body onload="weergaveUpdaten()">
-    <h1>Yalla Falafel</h1>
+<body onload="startSpel()">
+    <header>
+        <h1>Yalla Falafel</h1>
+        <button id="start" onclick="startSpel()">start</button>
+    </header>
     <main>
         <p>Dag: <span id="dag">?</span>/<span id="zomerdagen">?</span></p>
         <p>Geld: <span id="geld">?</span></p>

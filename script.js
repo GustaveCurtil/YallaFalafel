@@ -5,16 +5,31 @@ let reputatieWeergave = document.querySelector('#reputatie');
 let falafelsWeergave = document.querySelector('#falafels');
 let locatieWeergave = document.querySelector('#locatie');
 
-let dag = 0;
-let zomerdagen = 10;
-let geld = 10;
-let reputatie = 100;
-let falafels = 0;
-let locatie = 'Baudelo'
+let dag;
+let zomerdagen;
+let geld;
+let reputatie;
+let falafels;
+let locatie;
 
-let spel = true;
-let score = 0;
-let klanten = 10;
+let spel;
+let score;
+let klanten;
+
+function startSpel() {
+    dag = 0;
+    zomerdagen = 10;
+    geld = 10;
+    reputatie = 100;
+    falafels = 0;
+    locatie = 'Baudelo'
+
+    spel = true;
+    score = 0;
+    klanten = 10;
+
+    weergaveUpdaten()
+}
 
 function weergaveUpdaten() {
         dagWeergave.innerHTML = dag;
