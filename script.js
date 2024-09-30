@@ -1,3 +1,5 @@
+let boodschapWeergave = document.querySelector('aside');
+
 let dagWeergave = document.querySelector('#dag');
 let zomerdagenWeergave = document.querySelector('#zomerdagen');
 let geldWeergave = document.querySelector('#geld');
@@ -15,6 +17,7 @@ let locatie;
 let spel;
 let score;
 let klanten;
+let boodschap;
 
 function startSpel() {
     dag = 0;
@@ -22,11 +25,12 @@ function startSpel() {
     geld = 10;
     reputatie = 100;
     falafels = 0;
-    locatie = 'Baudelo'
+    locatie = 'Baudelo';
 
     spel = true;
     score = 0;
     klanten = 10;
+    boodschap = "Welkom Ibrahim!"
 
     weergaveUpdaten()
 }
@@ -35,30 +39,31 @@ let locaties = document.querySelectorAll('#locaties button');
 console.log(locaties)
 
 function weergaveUpdaten() {
-        dagWeergave.innerHTML = dag;
-        zomerdagenWeergave.innerHTML = zomerdagen;
-        geldWeergave.innerHTML = geld;
-        reputatieWeergave.innerHTML = reputatie;
-        falafelsWeergave.innerHTML = falafels;
-        locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten + ")";
+    boodschapWeergave.innerHTML = boodschap
+    dagWeergave.innerHTML = dag;
+    zomerdagenWeergave.innerHTML = zomerdagen;
+    geldWeergave.innerHTML = geld;
+    reputatieWeergave.innerHTML = reputatie;
+    falafelsWeergave.innerHTML = falafels;
+    locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten + ")";
 
-        locaties.forEach(locatieKnop => {
-            if (locatieKnop.innerHTML == locatie) {
-                locatieKnop.classList.add("actief");
-            } else {
-                locatieKnop.classList.remove("actief");
-            }
-        });
+    locaties.forEach(locatieKnop => {
+        if (locatieKnop.innerHTML == locatie) {
+            locatieKnop.classList.add("actief");
+        } else {
+            locatieKnop.classList.remove("actief");
+        }
+    });
 }
 
 
 function koopFalafel() {
     if (spel) {
         if (geld > 0) {
-            falafels += 1;
-            geld -= 1;
+            falafels += geld;
+            geld = 0;
         } else {
-            console.log('shit, geen geld genoeg')
+            boodschap = "shit, geen geld genoeg";
         }
 
         weergaveUpdaten();
@@ -67,14 +72,16 @@ function koopFalafel() {
 
 function kiesLocatie(naam) {
     if (spel) {
-
+        console.log(reputatie);
+        console.log(klanten * reputatie);
+        console.log((klanten * reputatie) / 100);
         locatie = naam;
         if (naam === 'Baudelo') {
-            klanten = Math.floor(10 * (reputatie / 100));
+            klanten = Math.floor((10 * reputatie) / 100);
         } else if (naam === 'De Kouter') {
-            klanten = Math.floor(20 * (reputatie / 100));
+            klanten = Math.floor((20 * reputatie) / 100);
         } else {
-            console.log('error met locatie kiezen');
+            boodschap = 'error met locatie kiezen';
         }
 
         weergaveUpdaten();
@@ -84,22 +91,29 @@ function kiesLocatie(naam) {
 function startDag() {
     if (spel) {
         dag += 1;
-        console.log('aantal klanten: ' + klanten)
+        let teleurgestelden = 0;
+        let omzet = 0;
+        console.log(klanten);
         
         if (falafels >= klanten) {
             console.log('genoeg falafel voor iedereen');
             falafels -= klanten;
-            geld += klanten * 2;
+            omzet = klanten * 2
             reputatie += Math.floor(klanten / 10);
             score += klanten;
         } else {
-            let teleurgestelden = klanten - falafels;
-            geld += falafels * 2;
+            teleurgestelden = klanten - falafels;
+            omzet = falafels * 2;
             falafels = 0;
             reputatie -= Math.floor(teleurgestelden / 4);
             score += falafels;
         }
-    
+
+        geld += omzet;
+
+        boodschap = "DAG " + dag + ": Je hebt " + (klanten - teleurgestelden) + " klanten bediend (omzet: " + omzet + " geld)";
+        
+        kiesLocatie(locatie); 
         checkGameStatus();
         weergaveUpdaten();
     } else {
@@ -110,12 +124,12 @@ function startDag() {
 function checkGameStatus() {
     if (dag === zomerdagen) {
         spel = false;
-        console.log('YOU WIN: je hebt ' + zomerdagen + ' zomerdagen overleefd met een score van ' + score + ' verkochte falafels!');
+        boodschap = 'YOU WIN: je hebt ' + zomerdagen + ' zomerdagen overleefd met een score van ' + score + ' verkochte falafels!';
     } else if (reputatie < 0) {
-        console.log('GAME OVER: geen reputatie');
+        boodschap = 'GAME OVER: geen reputatie';
         spel = false;
     } else if (geld === 0 && falafels === 0) {
-        console.log('GAME OVER: geen geld en falafels makker');
+        boodschap = 'GAME OVER: geen geld en falafels makker';
         spel = false;
     } 
 
