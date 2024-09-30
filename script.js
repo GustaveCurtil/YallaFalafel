@@ -6,6 +6,8 @@ let geldWeergave = document.querySelector('#geld');
 let reputatieWeergave = document.querySelector('#reputatie');
 let falafelsWeergave = document.querySelector('#falafels');
 let locatieWeergave = document.querySelector('#locatie');
+let aankoopprijsWeergave = document.querySelector('#aankoopprijs');
+let verkoopprijsWeergave = document.querySelector('#verkoopprijs');
 
 let dag;
 let zomerdagen;
@@ -16,21 +18,29 @@ let locatie;
 
 let spel;
 let score;
+let bewoners;
 let klanten;
 let boodschap;
+
+let aankoopprijs;
+let verkoopprijs;
 
 function startSpel() {
     dag = 0;
     zomerdagen = 10;
-    geld = 10;
+    geld = 40;
     reputatie = 100;
     falafels = 0;
     locatie = 'Baudelo';
 
     spel = true;
     score = 0;
+    bewoners = 10;
     klanten = 10;
     boodschap = "Welkom Ibrahim!"
+
+    aankoopprijs = 4;
+    verkoopprijs = 5;
 
     weergaveUpdaten()
 }
@@ -45,7 +55,9 @@ function weergaveUpdaten() {
     geldWeergave.innerHTML = geld;
     reputatieWeergave.innerHTML = reputatie;
     falafelsWeergave.innerHTML = falafels;
-    locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten;
+    locatieWeergave.innerHTML = locatie + ": " + bewoners + " klanten + " + (reputatie - 100) + "% = " + klanten;
+    aankoopprijsWeergave.innerHTML = aankoopprijs;
+    verkoopprijsWeergave.innerHTML = verkoopprijs;
 
     locaties.forEach(locatieKnop => {
         if (locatieKnop.innerHTML == locatie) {
@@ -59,9 +71,9 @@ function weergaveUpdaten() {
 
 function koopFalafel() {
     if (spel) {
-        if (geld > 0) {
-            falafels += geld;
-            geld = 0;
+        if (geld >= aankoopprijs) {
+            falafels += Math.floor(geld / aankoopprijs);
+            geld = geld % aankoopprijs;
         } else {
             boodschap = "shit, geen geld genoeg";
         }
@@ -74,12 +86,14 @@ function kiesLocatie(naam) {
     if (spel) {
         locatie = naam;
         if (naam === 'Baudelo') {
-            klanten = Math.floor((10 * reputatie) / 100);
+            bewoners = 10;
         } else if (naam === 'De Kouter') {
-            klanten = Math.floor((20 * reputatie) / 100);
+            bewoners = 20;
         } else {
             boodschap = 'error met locatie kiezen';
         }
+
+        klanten = Math.floor((bewoners * reputatie) / 100);
 
         weergaveUpdaten();
     }
@@ -94,12 +108,12 @@ function startDag() {
         if (falafels >= klanten) {
             console.log('genoeg falafel voor iedereen');
             falafels -= klanten;
-            omzet = klanten * 2
+            omzet = klanten * verkoopprijs;
             reputatie += Math.floor(klanten / 10);
             score += klanten;
         } else {
             teleurgestelden = klanten - falafels;
-            omzet = falafels * 2;
+            omzet = falafels * verkoopprijs;
             falafels = 0;
             reputatie -= Math.floor(teleurgestelden / 4);
             score += falafels;
