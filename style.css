@@ -2,6 +2,10 @@
     padding: 0;
     margin: 0;
     box-sizing: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+
 }
 
 body {
@@ -30,7 +34,16 @@ h1 {
 }
 
 header button {
+    aspect-ratio: 1/1;
+    height: 100%;
 
+    border: solid 1px black;
+    background-color: green;
+    color:white;
+}
+
+header button:hover {
+    background-color: black;
 }
 
 main {
