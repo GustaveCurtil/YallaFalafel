@@ -112,7 +112,7 @@ section button#start:hover {
     background-color: rgb(255, 0, 0);
 }
 
-button:active {
+section button:active {
     background-color: initial;
     color: initial;
 }
