@@ -31,6 +31,9 @@ function startSpel() {
     weergaveUpdaten()
 }
 
+let locaties = document.querySelectorAll('#locaties button');
+console.log(locaties)
+
 function weergaveUpdaten() {
         dagWeergave.innerHTML = dag;
         zomerdagenWeergave.innerHTML = zomerdagen;
@@ -38,7 +41,14 @@ function weergaveUpdaten() {
         reputatieWeergave.innerHTML = reputatie;
         falafelsWeergave.innerHTML = falafels;
         locatieWeergave.innerHTML = locatie + ": " + klanten + " klanten + " + (reputatie - 100) + "% = " + klanten + ")";
-    
+
+        locaties.forEach(locatieKnop => {
+            if (locatieKnop.innerHTML == locatie) {
+                locatieKnop.classList.add("actief");
+            } else {
+                locatieKnop.classList.remove("actief");
+            }
+        });
 }
 
 
@@ -80,13 +90,13 @@ function startDag() {
             console.log('genoeg falafel voor iedereen');
             falafels -= klanten;
             geld += klanten * 2;
-            reputatie += klanten / 10;
+            reputatie += Math.floor(klanten / 10);
             score += klanten;
         } else {
             let teleurgestelden = klanten - falafels;
             geld += falafels * 2;
             falafels = 0;
-            reputatie -= teleurgestelden / 4;
+            reputatie -= Math.floor(teleurgestelden / 4);
             score += falafels;
         }
     
